@@ -3,7 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Naya &amp; Co. — Web Design for Boutique Stays</title>
+<title>Naya Studio — Web Design for Boutique Stays</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="assets/apple-touch-icon.png">
+<meta name="description" content="Quietly considered websites for boutique stays and small hospitality brands across Greece. Bilingual EL/EN, custom-built, typography-first.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Italiana&family=Jost:wght@300;400;500&display=swap&subset=latin,greek,greek-ext" rel="stylesheet">
@@ -89,13 +94,41 @@
     gap: 24px;
   }
   .brand-mark {
-    font-family: 'Italiana', serif;
-    font-size: 22px;
-    letter-spacing: 0.14em;
-    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
     flex-shrink: 0;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
   }
-  .brand-mark span { color: var(--gold-deep); }
+  .brand-mark:hover { opacity: 0.75; }
+  .brand-mark img {
+    height: 38px;
+    width: auto;
+    display: block;
+  }
+  .brand-mark .wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.005em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .brand-mark .wordmark .naya { color: var(--ink); }
+  .brand-mark .wordmark .studio { color: var(--gold-deep); }
+  .brand-mark .wordmark .tld {
+    color: var(--gold-deep);
+    font-size: 14px;
+    vertical-align: baseline;
+    margin-left: 1px;
+  }
+  @media (max-width: 540px) {
+    .brand-mark img { height: 32px; }
+    .brand-mark .wordmark { font-size: 20px; }
+    .brand-mark .wordmark .tld { font-size: 12px; }
+    .brand-mark { gap: 10px; }
+  }
   .nav-links {
     display: flex;
     gap: 30px;
@@ -621,7 +654,10 @@
 <!-- ============ NAV ============ -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="brand-mark">NAYA<span> &amp; </span>CO.</a>
+    <a href="#" class="brand-mark" aria-label="Naya Studio">
+      <img src="assets/naya-mark.png" alt="" />
+      <span class="wordmark"><span class="naya">Naya</span> <span class="studio">Studio</span><span class="tld">.gr</span></span>
+    </a>
     <div class="nav-links">
       <a href="#work">
         <span lang="en">Work</span>
@@ -958,8 +994,8 @@
     </p>
 
     <div class="contact-actions">
-      <a href="mailto:info@nayastudio.gr" class="contact-email">hello@nayastudio.gr</a>
-      <a href="mailto:info@nayastudio.gr" class="btn btn-gold">
+      <a href="mailto:hello@nayastudio.gr" class="contact-email">hello@nayastudio.gr</a>
+      <a href="mailto:hello@nayastudio.gr" class="btn btn-gold">
         <span lang="en">Write to me</span>
         <span lang="el">Γράψτε μου</span>
       </a>
@@ -985,7 +1021,7 @@
 <footer>
   <div class="wrap">
     <p>
-      © 2026 Naya &amp; Co. · <span class="gold">
+      © 2026 Naya Studio · <span class="gold">
         <span lang="en">Designed &amp; built in Halkidiki</span>
         <span lang="el">Σχεδιασμός &amp; ανάπτυξη στη Χαλκιδική</span>
       </span>
