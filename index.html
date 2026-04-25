@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Naya &amp; Co. — Web Design for Boutique Stays</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Italiana&family=Jost:wght@300;400;500&display=swap&subset=latin,greek,greek-ext" rel="stylesheet">
+<style>
+  :root {
+    --cream:    #F5EDE0;
+    --sand:    #E8DCC4;
+    --bone:    #FAF5EC;
+    --ink:     #2A2620;
+    --ink-soft:#5C5249;
+    --gold:    #B8945F;
+    --gold-deep:#8E6E3F;
+    --sage:    #8B9A85;
+    --line:    rgba(42,38,32,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(184,148,95,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(139,154,133,0.06) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  /* ---------- Bilingual visibility ---------- */
+  html[lang="el"] [lang="en"] { display: none !important; }
+  html[lang="en"] [lang="el"] { display: none !important; }
+
+  /* ---------- Typography ---------- */
+  .display-italic {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold);
+    font-size: 14px;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--gold-deep); }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  .rule { height: 1px; background: var(--line); border: none; margin: 0; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(245,237,224,0.85);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 32px;
+    max-width: 1240px;
+    margin: 0 auto;
+    gap: 24px;
+  }
+  .brand-mark {
+    font-family: 'Italiana', serif;
+    font-size: 22px;
+    letter-spacing: 0.14em;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+  .brand-mark span { color: var(--gold-deep); }
+  .nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  .nav-links a:not(.btn) {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s;
+  }
+
+  /* Lang toggle */
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    border-left: 1px solid var(--line);
+    padding-left: 24px;
+  }
+  .lang-toggle button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 4px 2px;
+    letter-spacing: 0.2em;
+    transition: color 0.3s;
+  }
+  .lang-toggle button:hover { color: var(--gold-deep); }
+  .lang-toggle button.active {
+    color: var(--gold-deep);
+    font-weight: 500;
+    border-bottom: 1px solid var(--gold);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 26px;
+    border: 1px solid var(--ink);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: all 0.4s ease;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    color: var(--ink);
+  }
+  .btn:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .btn-gold {
+    border-color: var(--gold-deep);
+    color: var(--gold-deep);
+  }
+  .btn-gold:hover {
+    background: var(--gold-deep);
+    color: var(--cream);
+  }
+
+  @media (max-width: 860px) {
+    .nav-links a:not(.btn) { display: none; }
+    .lang-toggle { border-left: none; padding-left: 0; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 130px 0 110px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero h1 {
+    margin: 40px 0 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(50px, 8.5vw, 120px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-deep);
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 60px;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+  .hero-meta p {
+    max-width: 480px;
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .hero-corner {
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 2;
+  }
+  .hero-corner .gold-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-right: 8px;
+    vertical-align: middle;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .ornament {
+    position: absolute;
+    top: 140px;
+    right: 5%;
+    width: 110px;
+    height: 110px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  @media (max-width: 900px) { .ornament { display: none; } }
+
+  /* ---------- Section header ---------- */
+  .section { padding: 110px 0; position: relative; }
+  .section-header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    align-items: baseline;
+    margin-bottom: 80px;
+  }
+  .section-header h2 {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  .section-header h2 em { font-style: italic; color: var(--gold-deep); }
+
+  /* ---------- Selected Work ---------- */
+  .work-block { background: var(--bone); }
+  .case-study {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .case-study { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .case-img {
+    aspect-ratio: 4 / 5;
+    background:
+      linear-gradient(135deg, rgba(184,148,95,0.18) 0%, rgba(232,220,196,0.6) 50%, rgba(139,154,133,0.15) 100%),
+      var(--sand);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .case-img::before {
+    content: '';
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(184,148,95,0.3);
+    pointer-events: none;
+  }
+  .case-img-label {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    font-family: 'Italiana', serif;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--ink);
+  }
+  .case-img-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 48px;
+    color: var(--gold-deep);
+    opacity: 0.5;
+  }
+
+  .case-tag {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 18px;
+    display: block;
+  }
+  .case-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.05;
+    margin: 0 0 24px;
+    letter-spacing: -0.01em;
+  }
+  .case-title em { font-style: italic; color: var(--gold-deep); }
+  .case-desc {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+  .case-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 40px;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 32px;
+  }
+  .case-meta dt {
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 6px;
+  }
+  .case-meta dd {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+  }
+
+  .case-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    transition: all 0.3s;
+  }
+  .case-link:hover { color: var(--gold-deep); border-color: var(--gold-deep); }
+  .case-link span.italic-tag { font-family: 'Cormorant Garamond', serif; font-style: italic; text-transform: lowercase; letter-spacing: 0; }
+
+  .more-work {
+    margin-top: 100px;
+    padding: 56px;
+    text-align: center;
+    border: 1px solid var(--line);
+    background: var(--cream);
+  }
+  .more-work .display-italic {
+    font-size: 28px;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+  }
+  .more-work p {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ---------- Services ---------- */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } }
+  .service {
+    padding: 48px 36px;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    position: relative;
+    transition: background 0.4s ease;
+  }
+  .service:last-child { border-right: none; }
+  @media (max-width: 900px) { .service { border-right: none; } }
+  .service:hover { background: var(--bone); }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.1;
+    margin: 0 0 6px;
+  }
+  .service-name em { font-style: italic; color: var(--gold-deep); }
+  .service-tag {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+  }
+  .service-blurb {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0 0 12px;
+  }
+  .service-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold-deep);
+    margin: 24px 0 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .service-price small {
+    display: block;
+    font-style: normal;
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .service-list { list-style: none; padding: 0; margin: 0; }
+  .service-list li {
+    padding: 10px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-bottom: 1px dotted var(--line);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .service-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Approach ---------- */
+  .approach-block { background: var(--bone); }
+  .approach-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { .approach-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .approach-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.3;
+    color: var(--ink);
+    margin: 0;
+  }
+  .approach-quote::before {
+    content: '"';
+    display: block;
+    font-size: 80px;
+    line-height: 0.5;
+    color: var(--gold);
+    margin-bottom: 24px;
+    font-style: normal;
+  }
+  .principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px 40px;
+  }
+  @media (max-width: 600px) { .principles { grid-template-columns: 1fr; } }
+  .principle h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0 0 8px;
+  }
+  .principle h3 em { font-style: italic; color: var(--gold-deep); }
+  .principle p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .principle-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 14px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    padding: 130px 0 90px;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at center top, rgba(184,148,95,0.12) 0%, transparent 60%),
+      var(--cream);
+  }
+  .contact .eyebrow { display: block; margin-bottom: 32px; }
+  .contact h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(44px, 6.5vw, 84px);
+    line-height: 1.05;
+    margin: 0 0 32px;
+    letter-spacing: -0.01em;
+  }
+  .contact h2 em { font-style: italic; color: var(--gold-deep); }
+  .contact-sub {
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin: 0 auto 56px;
+    line-height: 1.7;
+  }
+  .contact-actions {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+  .contact-email {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 6px;
+    transition: color 0.3s;
+  }
+  .contact-email:hover { color: var(--gold-deep); }
+  .contact-meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 48px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 36px 0;
+    text-align: center;
+  }
+  footer p {
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  footer .gold {
+    color: var(--gold-deep);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+  }
+
+  /* ---------- Reveal animation ---------- */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .rise { animation: rise 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="brand-mark">NAYA<span> &amp; </span>CO.</a>
+    <div class="nav-links">
+      <a href="#work">
+        <span lang="en">Work</span>
+        <span lang="el">Έργα</span>
+      </a>
+      <a href="#services">
+        <span lang="en">Services</span>
+        <span lang="el">Υπηρεσίες</span>
+      </a>
+      <a href="#approach">
+        <span lang="en">Approach</span>
+        <span lang="el">Προσέγγιση</span>
+      </a>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-set-lang="el" class="active">EL</button>
+        <span>·</span>
+        <button data-set-lang="en">EN</button>
+      </div>
+      <a href="#contact" class="btn btn-gold">
+        <span lang="en">Start a Project</span>
+        <span lang="el">Νέο Έργο</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <svg class="ornament" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="48" stroke="#B8945F" stroke-width="0.5"/>
+    <circle cx="50" cy="50" r="32" stroke="#B8945F" stroke-width="0.5"/>
+    <path d="M50 2 L50 98 M2 50 L98 50" stroke="#B8945F" stroke-width="0.5" stroke-dasharray="2 4"/>
+    <circle cx="50" cy="50" r="4" fill="#B8945F"/>
+  </svg>
+
+  <div class="wrap">
+    <div class="rise delay-1">
+      <span class="eyebrow" lang="en">Design Studio · Greece</span>
+      <span class="eyebrow" lang="el">Στούντιο Σχεδιασμού · Ελλάδα</span>
+    </div>
+
+    <h1 class="rise delay-2">
+      <span lang="en">
+        Quietly considered<br>
+        websites for <em>boutique</em><br>
+        stays &amp; small brands.
+      </span>
+      <span lang="el">
+        Διακριτικές ιστοσελίδες<br>
+        για <em>boutique</em> καταλύματα<br>
+        και ανεξάρτητες μάρκες.
+      </span>
+    </h1>
+
+    <div class="hero-meta">
+      <p class="rise delay-3">
+        <span lang="en">I design and build understated, beautifully typeset websites for short-term rentals, boutique hotels, and independent hospitality brands across Greece — sites that look as thoughtful as the places they represent.</span>
+        <span lang="el">Σχεδιάζω και αναπτύσσω λιτές, τυπογραφικά προσεγμένες ιστοσελίδες για βραχυχρόνιες μισθώσεις, boutique ξενοδοχεία και ανεξάρτητες μάρκες φιλοξενίας σε όλη την Ελλάδα — ιστοσελίδες εξίσου μελετημένες με τους χώρους που εκπροσωπούν.</span>
+      </p>
+      <div class="hero-corner rise delay-4">
+        <div>
+          <span class="gold-dot"></span>
+          <span lang="en">Currently accepting projects</span>
+          <span lang="el">Διαθέσιμη για νέα έργα</span>
+        </div>
+        <div>
+          <span lang="en">Halkidiki · Thessaloniki · Remote</span>
+          <span lang="el">Χαλκιδική · Θεσσαλονίκη · Εξ αποστάσεως</span>
+        </div>
+        <div>EL · EN</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<hr class="rule" />
+
+<!-- ============ SELECTED WORK ============ -->
+<section class="section work-block" id="work">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="section-num">— 01</span>
+      <h2>
+        <span lang="en">Selected <em>Work</em></span>
+        <span lang="el">Επιλεγμένα <em>Έργα</em></span>
+      </h2>
+    </div>
+
+    <div class="case-study">
+      <div class="case-img">
+        <div class="case-img-mark">SV</div>
+        <div class="case-img-label">— Serene Vintage · 2025</div>
+      </div>
+
+      <div>
+        <span class="case-tag">
+          <span lang="en">— Featured Case Study</span>
+          <span lang="el">— Παρουσίαση Έργου</span>
+        </span>
+        <h3 class="case-title">Serene <em>Vintage</em></h3>
+        <p class="case-desc">
+          <span lang="en">A full brand and website for a sea-view vacation apartment in Nea Moudania, Halkidiki. The brief: build a direct-booking presence that feels closer to a boutique hotel than a Booking.com listing — refined typography, a warm vintage palette, and an identity that earns the property a price tier above its neighbors.</span>
+          <span lang="el">Ολοκληρωμένη ταυτότητα και ιστοσελίδα για διαμέρισμα διακοπών με θέα θάλασσα στα Νέα Μουδανιά Χαλκιδικής. Η ανάθεση: μια παρουσία απευθείας κρατήσεων που μοιάζει περισσότερο με boutique ξενοδοχείο παρά με καταχώρηση στο Booking.com — προσεγμένη τυπογραφία, ζεστή vintage παλέτα, και μια ταυτότητα που τοποθετεί το ακίνητο σε ανώτερη κατηγορία τιμής.</span>
+        </p>
+
+        <dl class="case-meta">
+          <div>
+            <dt><span lang="en">Scope</span><span lang="el">Πεδίο</span></dt>
+            <dd><span lang="en">Identity, Web, Copy</span><span lang="el">Ταυτότητα, Web, Κείμενα</span></dd>
+          </div>
+          <div>
+            <dt><span lang="en">Year</span><span lang="el">Έτος</span></dt>
+            <dd>2025</dd>
+          </div>
+          <div>
+            <dt><span lang="en">Sector</span><span lang="el">Τομέας</span></dt>
+            <dd><span lang="en">Hospitality</span><span lang="el">Φιλοξενία</span></dd>
+          </div>
+          <div>
+            <dt><span lang="en">Build</span><span lang="el">Ανάπτυξη</span></dt>
+            <dd>Custom HTML / CSS</dd>
+          </div>
+        </dl>
+
+        <a href="https://serenevintage.gr" target="_blank" rel="noopener" class="case-link">
+          <span lang="en"><span class="italic-tag">visit</span> serenevintage.gr →</span>
+          <span lang="el"><span class="italic-tag">επίσκεψη</span> serenevintage.gr →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="more-work">
+      <p class="display-italic">
+        <span lang="en">— more work, in slow rotation</span>
+        <span lang="el">— περισσότερα έργα, σε αργή εναλλαγή</span>
+      </p>
+      <p>
+        <span lang="en">New case studies are added a few times a year. To request additional samples, please get in touch.</span>
+        <span lang="el">Νέα έργα προστίθενται λίγες φορές τον χρόνο. Για επιπλέον δείγματα, επικοινωνήστε μαζί μου.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="section-num">— 02</span>
+      <h2>
+        <span lang="en">Services &amp; <em>Investment</em></span>
+        <span lang="el">Υπηρεσίες &amp; <em>Επένδυση</em></span>
+      </h2>
+    </div>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service">
+      <div class="service-num">i.</div>
+      <h3 class="service-name">
+        <span lang="en">The <em>Single Page</em></span>
+        <span lang="el">Η <em>Σελίδα</em></span>
+      </h3>
+      <div class="service-tag">
+        <span lang="en">— Essentials</span>
+        <span lang="el">— Βασικά</span>
+      </div>
+      <p class="service-blurb">
+        <span lang="en">A polished one-page presence for properties or makers ready to step beyond template builders. Direct-booking ready.</span>
+        <span lang="el">Μια προσεγμένη παρουσία μίας σελίδας για ακίνητα και δημιουργούς που θέλουν κάτι πέρα από τα έτοιμα templates. Έτοιμη για απευθείας κρατήσεις.</span>
+      </p>
+      <div class="service-price">
+        <small><span lang="en">From</span><span lang="el">Από</span></small>
+        € 450
+      </div>
+      <ul class="service-list">
+        <li><span lang="en">Custom one-page design</span><span lang="el">Custom σχεδιασμός μίας σελίδας</span></li>
+        <li><span lang="en">Mobile-first build</span><span lang="el">Ανάπτυξη mobile-first</span></li>
+        <li><span lang="en">Photo curation &amp; copy review</span><span lang="el">Επιμέλεια φωτογραφιών &amp; κειμένων</span></li>
+        <li><span lang="en">Booking link integration</span><span lang="el">Σύνδεση με σύστημα κρατήσεων</span></li>
+        <li><span lang="en">Two rounds of revisions</span><span lang="el">Δύο γύροι αναθεωρήσεων</span></li>
+      </ul>
+    </div>
+
+    <div class="service">
+      <div class="service-num">ii.</div>
+      <h3 class="service-name">
+        <span lang="en">The <em>Boutique Site</em></span>
+        <span lang="el">Το <em>Boutique</em></span>
+      </h3>
+      <div class="service-tag">
+        <span lang="en">— Most Popular</span>
+        <span lang="el">— Δημοφιλέστερο</span>
+      </div>
+      <p class="service-blurb">
+        <span lang="en">A complete multi-page website with a defined visual language — for properties, studios, and small hospitality brands.</span>
+        <span lang="el">Μια ολοκληρωμένη πολυσέλιδη ιστοσελίδα με σαφή οπτική γλώσσα — για καταλύματα, στούντιο και μικρές μάρκες φιλοξενίας.</span>
+      </p>
+      <div class="service-price">
+        <small><span lang="en">From</span><span lang="el">Από</span></small>
+        € 1,200
+      </div>
+      <ul class="service-list">
+        <li><span lang="en">4–6 fully designed pages</span><span lang="el">4–6 πλήρως σχεδιασμένες σελίδες</span></li>
+        <li><span lang="en">Mini brand system &amp; type pairing</span><span lang="el">Mini brand system &amp; επιλογή τυπογραφίας</span></li>
+        <li><span lang="en">Bilingual copy (EL / EN)</span><span lang="el">Δίγλωσσα κείμενα (EL / EN)</span></li>
+        <li><span lang="en">Booking &amp; analytics setup</span><span lang="el">Ρύθμιση κρατήσεων &amp; analytics</span></li>
+        <li><span lang="en">Three rounds of revisions</span><span lang="el">Τρεις γύροι αναθεωρήσεων</span></li>
+      </ul>
+    </div>
+
+    <div class="service">
+      <div class="service-num">iii.</div>
+      <h3 class="service-name">
+        <span lang="en">The <em>Full Identity</em></span>
+        <span lang="el">Η <em>Πλήρης Ταυτότητα</em></span>
+      </h3>
+      <div class="service-tag">
+        <span lang="en">— Considered</span>
+        <span lang="el">— Ολοκληρωμένο</span>
+      </div>
+      <p class="service-blurb">
+        <span lang="en">Logo, brand world, and full website — for new properties or brands that want to launch with a complete, distinctive presence.</span>
+        <span lang="el">Λογότυπο, brand world και πλήρης ιστοσελίδα — για νέα ακίνητα ή μάρκες που θέλουν να ξεκινήσουν με μια ολοκληρωμένη, ξεχωριστή παρουσία.</span>
+      </p>
+      <div class="service-price">
+        <small><span lang="en">From</span><span lang="el">Από</span></small>
+        € 2,400
+      </div>
+      <ul class="service-list">
+        <li><span lang="en">Logo &amp; supporting marks</span><span lang="el">Λογότυπο &amp; βοηθητικά σήματα</span></li>
+        <li><span lang="en">Full brand system &amp; guidelines</span><span lang="el">Πλήρες brand system &amp; guidelines</span></li>
+        <li><span lang="en">Website (up to 8 pages)</span><span lang="el">Ιστοσελίδα (έως 8 σελίδες)</span></li>
+        <li><span lang="en">Print collateral starter set</span><span lang="el">Βασικό σετ έντυπου υλικού</span></li>
+        <li><span lang="en">Launch support &amp; handover</span><span lang="el">Υποστήριξη launch &amp; παράδοση</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap" style="margin-top: 40px; text-align: center;">
+    <p style="font-size: 13px; color: var(--ink-soft); letter-spacing: 0.04em; max-width: 620px; margin: 0 auto;">
+      <em style="font-family: 'Cormorant Garamond', serif; color: var(--gold-deep);">
+        <span lang="en">Note —</span>
+        <span lang="el">Σημείωση —</span>
+      </em>
+      <span lang="en">All figures are starting points. Each project is quoted individually based on scope. Optional add-ons include photography direction, ongoing maintenance, and additional language versions.</span>
+      <span lang="el">Όλες οι τιμές αποτελούν αφετηρία. Κάθε έργο τιμολογείται ξεχωριστά βάσει εύρους. Προαιρετικά: σκηνοθεσία φωτογράφισης, συνεχής υποστήριξη, επιπλέον γλωσσικές εκδόσεις.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ APPROACH ============ -->
+<section class="section approach-block" id="approach">
+  <div class="wrap">
+    <div class="section-header">
+      <span class="section-num">— 03</span>
+      <h2>
+        <span lang="en">Approach</span>
+        <span lang="el">Προσέγγιση</span>
+      </h2>
+    </div>
+
+    <div class="approach-grid">
+      <p class="approach-quote">
+        <span lang="en">Hospitality is a feeling, and a website is its first impression. I make sites that whisper, not shout.</span>
+        <span lang="el">Η φιλοξενία είναι ένα συναίσθημα, και η ιστοσελίδα η πρώτη της εντύπωση. Φτιάχνω sites που ψιθυρίζουν, δεν φωνάζουν.</span>
+      </p>
+
+      <div class="principles">
+        <div class="principle">
+          <span class="principle-num">i.</span>
+          <h3>
+            <span lang="en">Slow, by <em>design</em></span>
+            <span lang="el">Αργά, με <em>πρόθεση</em></span>
+          </h3>
+          <p>
+            <span lang="en">I take on a small number of projects each season. Every site is custom — no themes, no templates, no copy-paste layouts.</span>
+            <span lang="el">Αναλαμβάνω λίγα έργα ανά σεζόν. Κάθε site είναι custom — χωρίς θέματα, templates ή έτοιμα layouts.</span>
+          </p>
+        </div>
+        <div class="principle">
+          <span class="principle-num">ii.</span>
+          <h3>
+            <span lang="en">Typography <em>first</em></span>
+            <span lang="el">Πρώτα η <em>τυπογραφία</em></span>
+          </h3>
+          <p>
+            <span lang="en">Most websites are stitched together from stock pieces. Mine begin with type — the spine that holds the rest of the design upright.</span>
+            <span lang="el">Οι περισσότερες ιστοσελίδες συναρμολογούνται από έτοιμα κομμάτια. Οι δικές μου ξεκινούν από την τυπογραφία — τη ραχοκοκαλιά που στηρίζει τα υπόλοιπα.</span>
+          </p>
+        </div>
+        <div class="principle">
+          <span class="principle-num">iii.</span>
+          <h3>
+            <span lang="en">Bilingual <em>by default</em></span>
+            <span lang="el">Δίγλωσσα <em>εξαρχής</em></span>
+          </h3>
+          <p>
+            <span lang="en">Greek copy that reads naturally to Greek guests. English that doesn't sound translated. Both, considered.</span>
+            <span lang="el">Ελληνικά κείμενα που διαβάζονται φυσικά. Αγγλικά που δεν ακούγονται μεταφρασμένα. Και τα δύο, με προσοχή.</span>
+          </p>
+        </div>
+        <div class="principle">
+          <span class="principle-num">iv.</span>
+          <h3>
+            <span lang="en">Light to <em>maintain</em></span>
+            <span lang="el">Εύκολα στη <em>συντήρηση</em></span>
+          </h3>
+          <p>
+            <span lang="en">Custom code, no bloated page builders. Faster to load, easier to update, and yours forever — no monthly licenses.</span>
+            <span lang="el">Custom κώδικας, χωρίς βαριά page builders. Φορτώνουν γρήγορα, ενημερώνονται εύκολα, και είναι δικά σας για πάντα — χωρίς μηνιαίες συνδρομές.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">
+      <span lang="en">— Begin a project</span>
+      <span lang="el">— Νέο έργο</span>
+    </span>
+    <h2>
+      <span lang="en">Let's make something <em>quietly beautiful</em>.</span>
+      <span lang="el">Ας φτιάξουμε κάτι <em>διακριτικά όμορφο</em>.</span>
+    </h2>
+    <p class="contact-sub">
+      <span lang="en">I'm currently accepting a small number of projects for late 2026 and early 2027. Tell me about your property, your brand, or the idea you're holding — I read every message.</span>
+      <span lang="el">Δέχομαι μικρό αριθμό έργων για τα τέλη του 2026 και τις αρχές του 2027. Πείτε μου για το ακίνητο, τη μάρκα ή την ιδέα σας — διαβάζω κάθε μήνυμα.</span>
+    </p>
+
+    <div class="contact-actions">
+      <a href="mailto:hello@nayastudio.gr" class="contact-email">hello@nayastudio.gr</a>
+      <a href="mailto:hello@nayastudio.gr" class="btn btn-gold">
+        <span lang="en">Write to me</span>
+        <span lang="el">Γράψτε μου</span>
+      </a>
+    </div>
+
+    <div class="contact-meta">
+      <span>
+        <span lang="en">Halkidiki, GR</span>
+        <span lang="el">Χαλκιδική, Ελλάδα</span>
+      </span>
+      <span>·</span>
+      <span>
+        <span lang="en">Reply within 48h</span>
+        <span lang="el">Απάντηση εντός 48 ωρών</span>
+      </span>
+      <span>·</span>
+      <span>EL · EN</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <p>
+      © 2026 Naya &amp; Co. · <span class="gold">
+        <span lang="en">Designed &amp; built in Halkidiki</span>
+        <span lang="el">Σχεδιασμός &amp; ανάπτυξη στη Χαλκιδική</span>
+      </span>
+    </p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const html = document.documentElement;
+    const buttons = document.querySelectorAll('[data-set-lang]');
+
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    if (urlLang === 'en' || urlLang === 'el') setLang(urlLang);
+
+    function setLang(lang) {
+      html.setAttribute('lang', lang);
+      buttons.forEach(b => {
+        b.classList.toggle('active', b.dataset.setLang === lang);
+      });
+    }
+
+    buttons.forEach(b => {
+      b.addEventListener('click', () => setLang(b.dataset.setLang));
+    });
+  })();
+</script>
+
+</body>
+</html>
